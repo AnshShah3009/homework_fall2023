@@ -132,8 +132,10 @@ def run_training_loop(params):
             # TODO: collect `params['batch_size']` transitions
             # HINT: use utils.sample_trajectories
             # TODO: implement missing parts of utils.sample_trajectory
-            print(params)
+            batch_size = params['batch_size']
+            print("Printing params: ",params)
             paths, envsteps_this_batch = utils.sample_trajectories(env=env, policy=expert_policy, min_timesteps_per_batch=params['batch_size'], max_path_length=params['batch_size'])
+            print(paths)
 
             # relabel the collected obs with actions from a provided expert policy
             if params['do_dagger']:
@@ -252,7 +254,8 @@ def main():
 
     # convert args to dictionary
     params = vars(args)
-
+    print("Device :", ptu.device)
+    print(params)
     ##################################
     ### CREATE DIRECTORY FOR LOGGING
     ##################################

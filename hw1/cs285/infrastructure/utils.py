@@ -34,8 +34,11 @@ def sample_trajectory(env, policy, max_path_length, render=False):
     
         # TODO use the most recent ob to decide what to do
         # ac = TODO # HINT: this is a numpy array
-        ac = np.array(policy(torch.tensor(ob, device=ptu.device, dtype=torch.float32)).cpu().detach())
-        # print("ac shape", ac.shape, "sample  ",  env.action_space.sample())
+        # print(ob.shape)
+        ac = policy(torch.tensor(ob, device=ptu.device, dtype=torch.float32)).cpu().squeeze(0).detach().numpy()
+        # ac.
+        # print("ac shape", ac.shape, "env action sample  ",  env.action_space.sample().shape)
+        # assert ac.shape == env.action_space.sample().shape
         # ac = ac[0]
 
         # TODO: take that action and get reward and next ob
